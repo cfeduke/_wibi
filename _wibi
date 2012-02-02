@@ -1,0 +1,58 @@
+#compdef wibi
+# ------------------------------------------------------------------------------
+# Description
+# -----------
+#
+#  Completion script for Wibi (http://wibidata.com).
+#
+# ------------------------------------------------------------------------------
+# Authors
+# -------
+#
+#  * Charles Feduke (https://github.com/cfeduke)
+#
+# ------------------------------------------------------------------------------
+local curcontext="$curcontext" context state state_descr line ret=1
+typeset -A opt_args
+
+_arguments -C -A "version" \
+  '(- 1 *)'{version}'[Print the wibi version running]' \
+  '1: :->cmds' \
+  '*:: :->args' && ret=0
+
+case $state in
+  cmds)
+    _values "wibi command" \
+      "help[Display this help message]" \
+      "install[Install Wibi onto a running HBase instance]" \
+      "license[View or update your license details]" \
+      "upgrade[Upgrade to a newer version of Wibi]" \
+      "metadata[Backup or restore Wibi metadata]" \
+      "classpath[Print the classpath used to build or run Wibi]" \
+      "jar[Run a main class from the specified jar - use[ wibi jar <jarFile> <mainClass> [args...]]" \
+      "server[Start a wibi frontend server (foreground)]" \
+      "start-server[Start a server as a background process]" \
+      "stop-server[Stop a running background server]" \
+      "restart-server[Stop and restart server]" \
+      "ls[List, describe, or scan Wibi tables]" \
+      "create-table[Create a Wibi table]" \
+      "delete-table[Delete a Wibi table]" \
+      "flush-table[Flush table write-ahead logs]" \
+      "layout[Manage table layouts]" \
+      "freshener[Manage fresheners]" \
+      "bulk-import[Bulk import data into a table]" \
+      "put[Set the value of a single cell]" \
+      "synthesize-user-data[Synthesize user data into a table]" \
+      "gather[Run a WibiGatherer over a table]" \
+      "produce[Run a WibiProducer over a table]" \
+      "transform[Transform data using MapReduce]" \
+      "render[Render data using Wibi visualization]"
+    ret=0
+    ;;
+  args)
+    #case $line[1] in
+    ;;
+esac
+
+return ret
+      
